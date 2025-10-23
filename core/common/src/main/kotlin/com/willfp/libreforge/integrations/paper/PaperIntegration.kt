@@ -1,7 +1,6 @@
 package com.willfp.libreforge.integrations.paper
 
 import com.willfp.eco.core.EcoPlugin
-import com.willfp.eco.core.Prerequisite
 import com.willfp.eco.util.ClassUtils
 import com.willfp.libreforge.conditions.Conditions
 import com.willfp.libreforge.effects.Effects
@@ -28,10 +27,7 @@ object PaperIntegration : LoadableIntegration {
             Triggers.register(TriggerSwing)
         }
 
-        if (Prerequisite.HAS_1_18.isMet) {
-            Effects.register(EffectSendMinimessage)
-        }
-
+        Effects.register(EffectSendMinimessage)
         Conditions.register(ConditionInBubble)
         Conditions.register(ConditionInLava)
         Conditions.register(ConditionInRain)

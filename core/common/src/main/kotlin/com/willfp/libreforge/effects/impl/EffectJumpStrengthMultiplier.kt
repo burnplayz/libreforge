@@ -8,13 +8,13 @@ import org.bukkit.attribute.AttributeModifier
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 
-object EffectLuckMultiplier : AttributeEffect(
-    "luck_multiplier",
-    Attribute.LUCK,
+object EffectJumpStrengthMultiplier : AttributeEffect(
+    "jump_strength_multiplier",
+    Attribute.JUMP_STRENGTH,
     AttributeModifier.Operation.MULTIPLY_SCALAR_1
 ) {
     override val arguments = arguments {
-        require("multiplier", "You must specify the luck multiplier!")
+        require("multiplier", "You must specify the jump strength multiplier!")
     }
 
     override fun getValue(config: Config, entity: LivingEntity) =

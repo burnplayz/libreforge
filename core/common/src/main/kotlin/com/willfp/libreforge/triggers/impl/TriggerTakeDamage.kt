@@ -1,6 +1,5 @@
 package com.willfp.libreforge.triggers.impl
 
-import com.willfp.eco.core.Prerequisite
 import com.willfp.libreforge.toDispatcher
 import com.willfp.libreforge.triggers.Trigger
 import com.willfp.libreforge.triggers.TriggerData
@@ -22,16 +21,11 @@ object TriggerTakeDamage : Trigger("take_damage") {
         TriggerParameter.VALUE
     )
 
-    private val ignoredCauses = mutableSetOf(
+    private val ignoredCauses = setOf(
         EntityDamageEvent.DamageCause.VOID,
-        EntityDamageEvent.DamageCause.SUICIDE
+        EntityDamageEvent.DamageCause.SUICIDE,
+        EntityDamageEvent.DamageCause.KILL
     )
-
-    init {
-        if (Prerequisite.HAS_1_20.isMet) {
-            ignoredCauses += EntityDamageEvent.DamageCause.KILL
-        }
-    }
 
     @EventHandler(ignoreCancelled = true)
     fun handle(event: EntityDamageEvent) {

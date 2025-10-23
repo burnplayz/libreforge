@@ -1,4 +1,4 @@
-package com.willfp.libreforge.proxy.modern.effects.impl
+package com.willfp.libreforge.effects.impl
 
 import com.willfp.eco.core.config.interfaces.Config
 import com.willfp.libreforge.arguments
@@ -8,15 +8,19 @@ import org.bukkit.attribute.AttributeModifier
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 
-object EffectIncreaseStepHeight : AttributeEffect(
-    "increase_step_height",
-    Attribute.GENERIC_STEP_HEIGHT,
+object EffectMiningEfficiency : AttributeEffect(
+    "mining_efficiency",
+    Attribute.MINING_EFFICIENCY,
     AttributeModifier.Operation.ADD_NUMBER
 ) {
     override val arguments = arguments {
-        require("height", "You must specify the increase in step height!")
+        require("amount", "You must specify the amount of efficiency to add!")
+    }
+
+    override fun canApplyTo(entity: LivingEntity): Boolean {
+        return entity is Player
     }
 
     override fun getValue(config: Config, entity: LivingEntity) =
-        config.getDoubleFromExpression("height", entity as? Player)
+        config.getDoubleFromExpression("amount", entity as? Player)
 }

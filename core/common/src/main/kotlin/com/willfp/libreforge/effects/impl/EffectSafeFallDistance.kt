@@ -1,4 +1,4 @@
-package com.willfp.libreforge.proxy.modern.effects.impl
+package com.willfp.libreforge.effects.impl
 
 import com.willfp.eco.core.config.interfaces.Config
 import com.willfp.libreforge.arguments
@@ -8,19 +8,15 @@ import org.bukkit.attribute.AttributeModifier
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 
-object EffectEntityReach : AttributeEffect(
-    "entity_reach",
-    Attribute.PLAYER_ENTITY_INTERACTION_RANGE,
+object EffectSafeFallDistance : AttributeEffect(
+    "safe_fall_distance",
+    Attribute.SAFE_FALL_DISTANCE,
     AttributeModifier.Operation.ADD_NUMBER
 ) {
     override val arguments = arguments {
-        require("reach", "You must specify the amount of reach to add!")
-    }
-
-    override fun canApplyTo(entity: LivingEntity): Boolean {
-        return entity is Player
+        require("distance", "You must specify the increase in safe fall distance!")
     }
 
     override fun getValue(config: Config, entity: LivingEntity) =
-        config.getDoubleFromExpression("reach", entity as? Player)
+        config.getDoubleFromExpression("distance", entity as? Player)
 }
