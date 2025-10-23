@@ -8,11 +8,13 @@ import com.willfp.libreforge.effects.Effect
 import com.willfp.libreforge.effects.Identifiers
 import com.willfp.libreforge.get
 import com.willfp.libreforge.plugin
+import com.willfp.libreforge.proxy.Proxy
+import com.willfp.libreforge.proxy.loadProxy
+import org.bukkit.Bukkit
 import org.bukkit.attribute.Attribute
 import org.bukkit.attribute.AttributeInstance
 import org.bukkit.attribute.AttributeModifier
 import org.bukkit.entity.LivingEntity
-import org.bukkit.inventory.EquipmentSlotGroup
 
 abstract class AttributeEffect(
     id: String,
@@ -52,7 +54,6 @@ abstract class AttributeEffect(
         val modifierName = "libreforge:${this.id} - ${identifiers.key.key} (${holder.holder.id})"
 
         instance.clean(modifierName, identifiers)
-
         val modifier = attributeModifier(
             identifiers,
             modifierName,
@@ -87,9 +88,9 @@ abstract class AttributeEffect(
         )
 
         // Run on next tick to prevent constraining to the lower value during reloads.
-        plugin.scheduler.run {
-            constrainAttribute(entity, instance.value)
-        }
+        //plugin.scheduler.run {
+        //    constrainAttribute(entity, instance.value)
+        //}
     }
 
     private fun attributeModifier(
@@ -97,10 +98,20 @@ abstract class AttributeEffect(
         name: String,
         value: Double,
         operation: AttributeModifier.Operation
-    ) = AttributeModifier(
-        identifiers.key,
+    ) = loadProxy(AttributeManager::class.java).createModifier(
+        identifiers,
+        name,
         value,
-        operation,
-        EquipmentSlotGroup.ANY
+        operation
     )
+
+    @Proxy("AttributeManagerImpl")
+    interface AttributeManager {
+        fun createModifier(
+            identifiers: Identifiers,
+            name: String,
+            value: Double,
+            operation: AttributeModifier.Operation
+        ): AttributeModifier
+    }
 }

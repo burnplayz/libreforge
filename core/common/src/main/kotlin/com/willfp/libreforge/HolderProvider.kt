@@ -5,7 +5,9 @@ import com.github.benmanes.caffeine.cache.Caffeine
 import com.willfp.eco.core.map.listMap
 import com.willfp.libreforge.effects.EffectBlock
 import com.willfp.libreforge.slot.ItemHolderFinder
+import com.willfp.libreforge.slot.SlotTypes
 import org.bukkit.Bukkit
+import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 import org.bukkit.event.Event
 import org.bukkit.event.HandlerList
@@ -186,26 +188,22 @@ inline fun <reified T> registerSpecificRefreshFunction(crossinline function: (T)
     }
 }
 
-private val holderCooldown: Cache<UUID, Unit>? =
-    plugin.configYml.getInt("refresh.cooldown").takeIf { it > 0 }?.let {
-        Caffeine.newBuilder()
-            .expireAfterWrite(it.toLong(), TimeUnit.MILLISECONDS)
-            .build()
-    }
+
+private val holderCooldown: Cache<UUID, Unit>? = null
+//    plugin.configYml.getInt("refresh.cooldown").takeIf { it > 0 }?.let {
+//        Caffeine.newBuilder()
+//            .expireAfterWrite(it.toLong(), TimeUnit.MILLISECONDS)
+//            .build()
+//    }
 
 /**
  * Update holders, effects, and call refresh functions.
  */
 fun Dispatcher<*>.refreshHolders() {
-    if (holderCooldown != null) {
-        val isOnCooldown = holderCooldown.getIfPresent(this.uuid) != null
-        if (isOnCooldown) {
-            return
-        }
-
-        holderCooldown.put(this.uuid, Unit)
-    }
-
+//    if (holderCooldown != null) {
+//        holderCooldown.getIfPresent(this.uuid) ?: return
+//        holderCooldown.put(this.uuid, Unit)
+//    }
     this.forceRefreshHolders()
 }
 
