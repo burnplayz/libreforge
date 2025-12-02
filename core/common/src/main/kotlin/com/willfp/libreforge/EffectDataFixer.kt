@@ -95,8 +95,8 @@ object EffectDataFixer : Listener {
         }
 
         // Extra fix
-        if (this.health > (this.getAttribute(Attribute.GENERIC_MAX_HEALTH)?.value ?: 0.0)) {
-            this.health = this.getAttribute(Attribute.GENERIC_MAX_HEALTH)?.value ?: 0.0
+        if (this.health > (this.getAttribute(Attribute.MAX_HEALTH)?.value ?: 0.0)) {
+            this.health = this.getAttribute(Attribute.MAX_HEALTH)?.value ?: 0.0
         }
 
         // Legacy fix

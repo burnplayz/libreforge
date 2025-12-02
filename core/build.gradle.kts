@@ -17,10 +17,12 @@ tasks {
         relocate("org.apache.maven", "com.willfp.eco.libs.maven")
         relocate("com.willfp.modelenginebridge", "com.willfp.libreforge.libs.modelenginebridge")
 
+        /*
         relocate("kotlin", "com.willfp.eco.libs.kotlin")
         relocate("kotlin.jvm", "com.willfp.eco.libs.kotlin.jvm")
         relocate("kotlin.coroutines", "com.willfp.eco.libs.kotlin.coroutines")
         relocate("kotlin.reflect", "com.willfp.eco.libs.kotlin.reflect")
+         */
     }
 
     build {

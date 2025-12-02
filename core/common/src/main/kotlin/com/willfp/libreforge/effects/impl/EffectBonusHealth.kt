@@ -37,7 +37,7 @@ object EffectBonusHealth : AttributeEffect(
 
         val bonusHealth = config.getDoubleFromExpression("amount", data);
         player.health = (player.health + bonusHealth)
-            .coerceAtMost(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!.value)
+            .coerceAtMost(player.getAttribute(Attribute.MAX_HEALTH)!!.value)
 
         return true
     }
