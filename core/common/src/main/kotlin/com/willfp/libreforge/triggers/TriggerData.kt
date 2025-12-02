@@ -257,7 +257,8 @@ class TriggerData(
         velocity,
         item,
         text,
-        value
+        value,
+        altValue
     ) {
         this.holder = holder ?: EmptyProvidedHolder
         this.originalPlayer = originalPlayer
@@ -322,6 +323,7 @@ class TriggerData(
         item: ItemStack?,
         text: String?,
         value: Double,
+        altValue: Double,
         originalPlayer: Player?,
         internal1: Int,
         internal2: kotlin.jvm.internal.DefaultConstructorMarker?
@@ -337,7 +339,8 @@ class TriggerData(
         velocity,
         item,
         text,
-        value
+        value,
+        altValue
     ) {
         this.holder = holder ?: EmptyProvidedHolder
         this.originalPlayer = originalPlayer
@@ -356,6 +359,7 @@ class TriggerData(
         item: ItemStack?,
         text: String?,
         value: Double,
+        altValue: Double,
         @Suppress("UNUSED_PARAMETER") ignored: Int,
         @Suppress("UNUSED_PARAMETER") marker: kotlin.jvm.internal.DefaultConstructorMarker?
     ) : this(
@@ -370,6 +374,7 @@ class TriggerData(
         velocity,
         item,
         text,
-        value
+        value,
+        altValue
     )
 }
